@@ -30,7 +30,6 @@ import marauroa.common.game.RPClass;
 import marauroa.common.game.RPEvent;
 import marauroa.common.game.SyntaxException;
 
-
 /**
  * An event to show which creatures a player has killed.
  */
@@ -45,7 +44,6 @@ public class BestiaryEvent extends RPEvent {
 
 	private final List<String> soloKills;
 	private final List<String> sharedKills;
-
 
 	/**
 	 * Creates the rpclass.
@@ -62,8 +60,7 @@ public class BestiaryEvent extends RPEvent {
 	/**
 	 * Creates a new bestiary event.
 	 *
-	 * @param player
-	 * 		Player from whom the bestiary is requested.
+	 * @param player Player from whom the bestiary is requested.
 	 */
 	public BestiaryEvent(final Player player) {
 		this(player, true, true);
@@ -72,12 +69,11 @@ public class BestiaryEvent extends RPEvent {
 	/**
 	 * Creates a new bestiary event.
 	 *
-	 * @param player
-	 * 		Player from whom the bestiary is requested.
-	 * @param includeRare
-	 * 		If <code>true</code>, creatures marked as "rare" will be included.
-	 * @param includeAbnormal
-	 * 		If <code>true</code>, creatures marked as "abnormal" will be included.
+	 * @param player          Player from whom the bestiary is requested.
+	 * @param includeRare     If <code>true</code>, creatures marked as "rare" will
+	 *                        be included.
+	 * @param includeAbnormal If <code>true</code>, creatures marked as "abnormal"
+	 *                        will be included.
 	 */
 	public BestiaryEvent(final Player player, final boolean includeRare, final boolean includeAbnormal) {
 		super(BESTIARY);
@@ -107,7 +103,7 @@ public class BestiaryEvent extends RPEvent {
 
 			final EntityManager em = SingletonRepository.getEntityManager();
 
-			for (String k: killString.split("\\]\\[")) {
+			for (String k : killString.split("\\]\\[")) {
 				boolean shared = false;
 
 				if (k.startsWith("solo.")) {
@@ -137,7 +133,7 @@ public class BestiaryEvent extends RPEvent {
 			}
 
 			// place rare & abnormal enemies in separate lists
-			for (final Creature e: em.getCreatures()) {
+			for (final Creature e : em.getCreatures()) {
 				if (e.isRare()) {
 					rareEnemies.add(e);
 				} else if (e.isAbnormal()) {
@@ -176,10 +172,8 @@ public class BestiaryEvent extends RPEvent {
 	 * Entries are separated by semi-colons & are in the form of "name,solo,shared"
 	 * where "solo" & "shared" are boolean values.
 	 *
-	 * @param enemies
-	 * 		List of enemies.
-	 * @return
-	 * 		Formatted string.
+	 * @param enemies List of enemies.
+	 * @return Formatted string.
 	 */
 	private String getFormattedString(final List<Creature> enemies) {
 		final boolean rare = enemies.equals(rareEnemies);
@@ -189,7 +183,7 @@ public class BestiaryEvent extends RPEvent {
 		final int creatureCount = enemies.size();
 		int idx = 0;
 
-		for (final Creature enemy: enemies) {
+		for (final Creature enemy : enemies) {
 			String name = enemy.getName();
 			Boolean solo = false;
 			Boolean shared = false;
@@ -201,9 +195,12 @@ public class BestiaryEvent extends RPEvent {
 				shared = true;
 			}
 
-			// hide the names of creatures not killed by player
-			if (!solo && !shared) {
-				name = "???";
+			if (solo || shared) {
+				sb.append(name + "," + solo.toString() + "," + shared.toString());
+				if (idx != creatureCount - 1) {
+					sb.append(";");
+					idx++;
+				}
 			}
 
 			if (rare) {
@@ -212,12 +209,6 @@ public class BestiaryEvent extends RPEvent {
 				name += " (abnormal)";
 			}
 
-			sb.append(name + "," + solo.toString() + "," + shared.toString());
-			if (idx != creatureCount - 1) {
-				sb.append(";");
-			}
-
-			idx++;
 		}
 
 		return sb.toString();
