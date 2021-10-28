@@ -94,18 +94,20 @@ public class ReverseArrow extends AbstractQuest implements
 	protected Player player;
 
 	private Timer timer;
+	
+	public boolean check = false;
 
 	/**
 	 * Checks the result.
 	 */
-	protected class ReverseArrowCheck implements TurnListener {
+	class ReverseArrowCheck implements TurnListener {
 
 		/**
 		 * Is the task solved?
 		 *
 		 * @return true on success, false on failure
 		 */
-		private boolean checkBoard() {
+		boolean checkBoard() {
 			if (tokens == null) {
 				return false;
 			}
@@ -116,7 +118,7 @@ public class ReverseArrow extends AbstractQuest implements
 			// 1. there are 6 permutions so the code would quite messy
 			// 2. there may be a solution i did not recognize
 
-			// This aproach has the side effect that the code does not
+			// This approach has the side effect that the code does not
 			// tell the solution :-)
 
 			// sort the tokens according to their position
@@ -130,32 +132,63 @@ public class ReverseArrow extends AbstractQuest implements
 					return d;
 				}
 			});
-			// * * 0 * *
-			// * 1 2 3 *
-			// 4 5 6 7 8
-
+			
+            // arrow 1:              arrow 2:			
+			// * * 0 * *             * * 0 * *
+			// * 1 2 3 *             * 1 * 2 *
+			// 4 5 6 7 8      or     3 4 5 6 7
+			//                       * * 8 * *
+//
 			// get the position of the topmost token
 			final int topX = tokens.get(0).getX();
 			final int topY = tokens.get(0).getY();
+			
+			//determine the type of arrow
+			
+			//arrow 1
+			if (tokens.get(8).getY() == topY + 2) {
+				// check first row
+				for (int i = 1; i <= 2; i++ ) {
+					final Token token = tokens.get(i);
+					if (token.getX() != topX - 1 + i - 1
+							|| token.getY() != topY + 1) {
+						return false;
+					}
+				}
 
-			// check first row
-			for (int i = 1; i <= 3; i++) {
-				final Token token = tokens.get(i);
-				if (token.getX() != topX - 1 + i - 1
-						|| token.getY() != topY + 1) {
+				// check second row
+				for (int i = 4; i <= 8; i++) {
+					final Token token = tokens.get(i);
+					if (token.getX() != topX - 2 + i - 4
+							|| token.getY() != topY + 2) {
+						return false;
+					}
+				}
+			}
+			
+			//arrow 2
+			else {
+				final Token token1 = tokens.get(1);
+				final Token token2 = tokens.get(2);
+				if (token1.getX() != topX - 1 || token1.getY() != topY + 1
+						|| token2.getX() != topX + 1 || token2.getY() != topY +1) {
+					return false;
+					}
+	
+				// check second row
+				for (int i = 3; i <= 7; i++) {
+					final Token token = tokens.get(i);
+					if (token.getX() != topX - 2 + i - 3 || token.getY() != topY + 2) {
+						return false;
+					}
+				}
+				
+				// check third row
+				final Token token = tokens.get(8);
+				if(token.getX() != topX || token.getY() != topY + 3) {
 					return false;
 				}
 			}
-
-			// check second row
-			for (int i = 4; i <= 8; i++) {
-				final Token token = tokens.get(i);
-				if (token.getX() != topX - 2 + i - 4
-						|| token.getY() != topY + 2) {
-					return false;
-				}
-			}
-
 			return true;
 		}
 
@@ -188,6 +221,7 @@ public class ReverseArrow extends AbstractQuest implements
 			SingletonRepository.getTurnNotifier().notifyInTurns(6,
 					new FinishNotifier(true, player));
 		}
+		
 	}
 
 	/**
@@ -562,4 +596,6 @@ public class ReverseArrow extends AbstractQuest implements
 	public String getRegion() {
 		return Region.SEMOS_SURROUNDS;
 	}
+	
+	
 }
