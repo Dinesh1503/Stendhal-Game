@@ -1,6 +1,15 @@
 Changelog
 ---------
 ---------
+1.37
+*fixes*
+- Fixed Gamblos arrow so it now looks like an arrow.
+- Fixed quest to collect all elvish armour.
+- Fixed elemental suscepibilities of both glacier and solar centaurs.
+- Fixed issue where NPC Zynn Iwuho didn't grant XP after players ask him a question.
+- Fixed issue where players could teleport whilst poisoned.
+- Fixed bestiary item so it no loner is crowded with '???' entries.
+- Fixed dialogue issue with NPC Omura Sumitada so he now now longer offer a fee for training to players with too high an attack level.
 
 1.36
 *world*

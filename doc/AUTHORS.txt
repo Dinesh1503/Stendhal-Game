@@ -201,3 +201,12 @@ Notable contributors:
 - SnowFlake
   · Maps maker
   · NPCs
+  
+  Team 51 UoM:
+  - Alex Vickery
+  - Mohamed Ben Rahuma
+  - Hashim Shah
+  - Yi Jao
+  - Wei Tang
+  - Hristo Angelov
+  - Dinesh Salvem
