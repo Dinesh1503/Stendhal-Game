@@ -23,6 +23,7 @@ import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.core.events.TeleportNotifier;
 import games.stendhal.server.entity.player.Player;
+import games.stendhal.server.entity.status.StatusType;
 
 /**
  * Represents a marked teleport scroll.
@@ -68,6 +69,11 @@ public class MarkedScroll extends TeleportScroll {
 		StendhalRPZone zone = SingletonRepository.getRPWorld().getZone("0_semos_city");
 		int x = 30;
 		int y = 40;
+		
+		if (player.hasStatus(StatusType.POISONED)) {
+		player.sendPrivateText("Poison has disoriented you and you cannot teleport.");
+		return false;
+	}
 
 		/*
 		 * Marked scrolls have a destination which is stored in the infostring,
