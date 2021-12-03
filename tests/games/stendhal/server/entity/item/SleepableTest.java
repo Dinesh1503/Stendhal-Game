@@ -41,6 +41,7 @@ public class SleepableTest {
 		assertThat(bed.describe(), is("You see a bed and you can sleep in it."));
 	}
 
+	
 	/**
 	 * Test when player attempts to use ring without equipping it to slot.
 	 */

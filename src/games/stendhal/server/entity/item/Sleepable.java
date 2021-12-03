@@ -10,7 +10,7 @@ import games.stendhal.server.entity.status.StatusList;
 
 /**
  * Consumable item that can be used to cure/prevent a single or multiple status effects.
- *
+ *@author Yi Gao <yi.gao-2@student.manchester.ac.uk>
  */
 public class Sleepable extends Item {
 
@@ -27,6 +27,7 @@ public class Sleepable extends Item {
 		setMenu("Sleep|Use");
 		
 	}
+	
 
 	/**
 	 * Copy constructor.
