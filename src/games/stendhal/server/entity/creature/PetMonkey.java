@@ -82,6 +82,7 @@ public class PetMonkey extends Pet {
 		return true;
 	}
 	
+	//stealItem contains the logic to steal an item from a player and give it to a pet owner.
 	public void stealItem(Player player) {
 		if (player.isEquipped("banana")) {
 			player.drop("banana");
@@ -89,13 +90,12 @@ public class PetMonkey extends Pet {
 		} 
 	}
 	
+	//stealFromNearestPlayer contains the logic for the pet to find the nearest player to steal from.
 	public void stealFromNearestPlayer(Double range) {
 		Double squaredDistance = range * range;
 		Player nearestPlayer = null;
 		for (final Player player : getZone().getPlayers()) {
-			System.out.println("Player found" + player.getName());
 			if (!(player.getName().equals(owner.getName())) && this.squaredDistance(player) < squaredDistance) {
-				System.out.println("Nearest player: " + player.getName());
 				nearestPlayer = player;
 				squaredDistance = this.squaredDistance(player);
 			}
