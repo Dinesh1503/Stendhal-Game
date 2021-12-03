@@ -1,14 +1,3 @@
-/***************************************************************************
- *                   (C) Copyright 2003-2016 - Stendhal                    *
- ***************************************************************************
- ***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
 package games.stendhal.server.actions.admin;
 
 import static games.stendhal.common.constants.Actions.CREATURE;
@@ -28,6 +17,7 @@ import games.stendhal.server.entity.Entity;
 import games.stendhal.server.entity.creature.BabyDragon;
 import games.stendhal.server.entity.creature.Cat;
 import games.stendhal.server.entity.creature.Creature;
+import games.stendhal.server.entity.creature.PetMonkey;
 import games.stendhal.server.entity.creature.PurpleDragon;
 import games.stendhal.server.entity.creature.RaidCreature;
 import games.stendhal.server.entity.creature.Sheep;
@@ -102,7 +92,14 @@ public class SummonAction extends AdministrationAction {
 				} else {
 					final Sheep sheep = new Sheep(player);
 					found(type, sheep);
-				}
+				} 
+			} else if ("pet_monkey".equals(type)) {
+				if(player.hasPet()) {
+					error("You already own a monkey!");
+				} else {
+					final PetMonkey monkey = new PetMonkey(player);
+					found(type, monkey);
+				} 
 			}
 		}
 	}
