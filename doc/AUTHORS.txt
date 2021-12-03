@@ -207,6 +207,6 @@ Notable contributors:
   - Mohamed Ben Rahuma
   - Hashim Shah
   - Yi Jao
-  - Wei Tang
+  - Russell Tang
   - Hristo Angelov
-  - Dinesh Salvem
+  - Dinesh Selvam
