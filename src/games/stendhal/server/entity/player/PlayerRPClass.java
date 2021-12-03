@@ -82,6 +82,7 @@ public class PlayerRPClass {
 		player.addRPSlot("#pets", 1, Definition.HIDDEN);
 		player.addAttribute("pet", Type.INT);
 		player.addAttribute("cat", Type.INT);
+		player.addAttribute("pet_monkey", Type.INT);
 		player.addAttribute("baby_dragon", Type.INT);
 		player.addAttribute("purple_dragon", Type.INT);
 

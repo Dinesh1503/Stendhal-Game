@@ -88,6 +88,7 @@ public final class EntityMap {
 		register("purple_dragon", null, null, Pet.class);
 		register("cat", null, null, Pet.class);
 		register("pet", null, null, Pet.class);
+		register("pet_monkey", null, null, Pet.class);
 
 		register("npc", null, null, NPC.class);
 		register("training_dummy", null, null, NPC.class);

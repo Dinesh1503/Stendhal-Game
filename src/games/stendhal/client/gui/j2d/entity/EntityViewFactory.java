@@ -158,6 +158,7 @@ public class EntityViewFactory {
 		register("training_dummy", null, null, NPC2DView.class);
 
 		register("cat", null, null, Pet2DView.class);
+		register("pet_monkey", null, null, Pet2DView.class);
 		register("pet", null, null, Pet2DView.class);
 		register("baby_dragon", null, null, Pet2DView.class);
 		register("purple_dragon", null, null, Pet2DView.class);
