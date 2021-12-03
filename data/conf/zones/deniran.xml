@@ -232,6 +232,12 @@
 			<attribute name="move.continuous" />
 		</portal>
 
+		<portal x="17" y="71" ref="deniran_furniture_shop_entrance">
+			<destination zone="int_deniran_furniture_shop" ref="entrance" />
+			<attribute name="move.continuous" />
+		</portal>
+
+
 		<!-- NPCs -->
         <!--
 		<configurator class-name="games.stendhal.server.maps.deniran.cityoutside.DeniranMarketGrocerySellerNPC" />
@@ -1264,6 +1270,18 @@
 
 		<!-- NPCs -->
 		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.castle.KingNPC" />
+
+	</zone>
+
+	<zone name="int_deniran_furniture_shop" file="interiors/deniran/pawn_shop.tmx">
+
+		<portal x="6" y="13" ref="entrance">
+			<destination zone="0_deniran_city_e" ref="deniran_furniture_shop_entrance" />
+			<attribute name="move.continuous" />
+		</portal>
+
+		<!-- NPCs -->
+		<configurator class-name="games.stendhal.server.maps.deniran.cityinterior.furnitureshop.FurnitureshopNPC" />
 
 	</zone>
 
